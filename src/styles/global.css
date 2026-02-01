@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   CSS Custom Properties (Variables)
+   ============================================ */
+:root {
+	/* Colors */
+	--color-bg: #ffffff;
+	--color-bg-secondary: #f8fafc;
+	--color-text: #0f172a;
+	--color-text-secondary: #64748b;
+	--color-border: #e2e8f0;
+	--color-primary: #3b82f6;
+	--color-primary-hover: #2563eb;
+	
+	/* Animation durations */
+	--duration-fast: 200ms;
+	--duration-normal: 300ms;
+	--duration-slow: 500ms;
+	
+	/* Animation easings */
+	--ease-out: ease-out;
+	--ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark mode variables */
+.dark {
+	--color-bg: #0f172a;
+	--color-bg-secondary: #1e293b;
+	--color-text: #f8fafc;
+	--color-text-secondary: #94a3b8;
+	--color-border: #334155;
+}
+
+/* ============================================
+   Minimal CSS Reset
+   ============================================ */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	scroll-behavior: smooth;
+	-webkit-text-size-adjust: 100%;
+	-moz-tab-size: 4;
+	tab-size: 4;
+}
+
+body {
+	font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	font-size: 16px;
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: var(--color-bg);
+	color: var(--color-text);
+	transition: background-color var(--duration-normal) var(--ease-smooth),
+	            color var(--duration-normal) var(--ease-smooth);
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	overflow-wrap: break-word;
+}
+
+/* ============================================
+   Custom Animations
+   ============================================ */
+
+/* Fade In - opacity only (GPU optimized) */
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.animate-fade-in {
+	animation: fade-in 0.5s ease-out;
+}
+
+/* Slide Up - transform + opacity (GPU optimized) */
+@keyframes slide-up {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.animate-slide-up {
+	animation: slide-up 0.5s ease-out;
+}
+
+/* Scale Hover - subtle scale effect */
+@keyframes scale-hover {
+	from {
+		transform: scale(1);
+	}
+	to {
+		transform: scale(1.02);
+	}
+}
+
+.animate-scale-hover {
+	animation: scale-hover 0.3s ease;
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+/* GPU-accelerated transitions */
+.transition-gpu {
+	transition-property: transform, opacity;
+	will-change: transform, opacity;
+}
+
+/* Smooth hover scale (alternative to keyframe) */
+.hover\:scale-subtle {
+	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover\:scale-subtle:hover {
+	transform: scale(1.02);
+}
+
+/* Animation delays for staggered effects */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* ============================================
+   Base Component Styles
+   ============================================ */
+
+/* Button base */
+.btn {
+	@apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-all duration-300;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary {
+	@apply bg-primary-600 text-white hover:bg-primary-700;
+}
+
+/* Card base */
+.card {
+	@apply bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700;
+}
+
+/* Focus visible styles */
+:focus-visible {
+	@apply outline-none ring-2 ring-primary-500 ring-offset-2;
+}
