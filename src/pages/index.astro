@@ -1,16 +1,19 @@
 ---
+// index.astro - Página principal del portfolio
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Gallery from '../components/Gallery.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Jopii - Portfolio</title>
-	</head>
-	<body>
-		<h1 class="text-4xl font-bold text-center mt-10">Jopii Portfolio</h1>
-		<p class="text-center text-gray-600 mt-4">Coming soon...</p>
-	</body>
-</html>
+<Layout title="Jesús Jódar | 3D Artist">
+  <main>
+    <Hero />
+    <div id="about">
+      <About />
+    </div>
+    <Gallery />
+    <Footer />
+  </main>
+</Layout>
