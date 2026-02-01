@@ -6,43 +6,70 @@ interface Props {
 
 const { class: className = "" } = Astro.props;
 
-// Portfolio items - usando placeholders de imagen
+// Portfolio items - imágenes reales
 const portfolioItems = [
   {
     id: 1,
-    title: "Character Design",
-    category: "3D Modeling",
-    image: "/img/project-1.svg"
+    title: "Kimoyo Beads",
+    category: "Props",
+    image: "/img/kimoyo.webp",
+    alt: "Render 3D del Kimoyo Beads, collar tecnológico de Shuri de Black Panther"
   },
   {
     id: 2,
-    title: "Game Asset",
-    category: "Props",
-    image: "/img/project-2.svg"
+    title: "Evolución",
+    category: "Concept Art",
+    image: "/img/evolucion.webp",
+    alt: "Render 3D conceptual sobre evolución y transformación"
   },
   {
     id: 3,
-    title: "Visual Experience",
-    category: "Music Art",
-    image: "/img/project-3.svg"
+    title: "Omnitrix",
+    category: "Props",
+    image: "/img/omnitrix.webp",
+    alt: "Render 3D del Omnitrix, dispositivo alienígena de Ben 10"
   },
   {
     id: 4,
-    title: "Character Study",
-    category: "3D Modeling",
-    image: "/img/project-4.svg"
+    title: "Med-Mist",
+    category: "Game Asset",
+    image: "/img/medmist.webp",
+    alt: "Render 3D de Med-Mist, ítem de curación de Fortnite"
   },
   {
     id: 5,
-    title: "Environment",
-    category: "Scene Design",
-    image: "/img/project-5.svg"
+    title: "Kirby Azul",
+    category: "Character",
+    image: "/img/bluekirby.webp",
+    alt: "Render 3D de Kirby azul, personaje de videojuego en estilo cartoon"
   },
   {
     id: 6,
-    title: "Album Cover",
-    category: "Music Art",
-    image: "/img/project-6.svg"
+    title: "Prism Sword",
+    category: "Props",
+    image: "/img/prismsword.webp",
+    alt: "Render 3D de una espada prisma con efectos de luz"
+  },
+  {
+    id: 7,
+    title: "Revólver",
+    category: "Props",
+    image: "/img/revolver.webp",
+    alt: "Render 3D de un revólver con detalles realistas"
+  },
+  {
+    id: 8,
+    title: "Jake",
+    category: "Character",
+    image: "/img/jake.webp",
+    alt: "Render 3D de Jake el Perro de Hora de Aventura"
+  },
+  {
+    id: 9,
+    title: "Darkhold",
+    category: "Props",
+    image: "/img/darkhold.webp",
+    alt: "Render 3D del Darkhold, libro mágico del universo Marvel"
   }
 ];
 ---
@@ -51,21 +78,21 @@ const portfolioItems = [
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Section Header -->
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Selected Work</h2>
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Trabajos Recientes</h2>
       <p class="text-white/60 max-w-2xl mx-auto">
-        A collection of commissioned projects and personal work spanning character design, 
-        game assets, and visual experiences for music artists.
+        Una colección de proyectos personales y encargos que abarcan diseño de personajes, 
+        assets para videojuegos y experiencias visuales.
       </p>
     </div>
     
     <!-- Gallery Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {portfolioItems.map((item) => (
-        <div class="group relative aspect-[4/5] overflow-hidden rounded-lg bg-zinc-900">
+        <div class="group relative aspect-square overflow-hidden rounded-lg bg-zinc-900">
           <!-- Image -->
           <img 
             src={item.image}
-            alt={item.title}
+            alt={item.alt}
             class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
           />
@@ -89,7 +116,7 @@ const portfolioItems = [
         rel="noopener noreferrer"
         class="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors duration-200"
       >
-        <span>View more on Instagram</span>
+        <span>Ver más en Instagram</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M7 17L17 7M17 7H7M17 7V17"/>
         </svg>
