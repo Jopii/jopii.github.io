@@ -1,0 +1,205 @@
+---
+// FloatingShapes3D.astro - Figuras 3D con Three.js
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<div class={`floating-3d-container ${className}`}>
+  <canvas class="floating-shapes-canvas"></canvas>
+</div>
+
+<script>
+  import * as THREE from 'three';
+
+  // Esperar a que el DOM esté listo
+  document.addEventListener('DOMContentLoaded', () => {
+    const containers = document.querySelectorAll('.floating-3d-container');
+    
+    containers.forEach((container) => {
+      const canvas = container.querySelector('.floating-shapes-canvas');
+      if (!canvas) return;
+
+      // Configurar escena
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+      camera.position.z = 5;
+
+      // Renderer
+      const renderer = new THREE.WebGLRenderer({ 
+        canvas, 
+        alpha: true, 
+        antialias: true 
+      });
+      
+      // Tamaño responsive
+      const isMobile = window.innerWidth < 768;
+      const size = isMobile ? 80 : 120;
+      renderer.setSize(size, size);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // Colores del tema
+      const colors = [
+        0xf472b6, // Rosa
+        0xa78bfa, // Lavanda
+        0xf9a8d4, // Rosa claro
+        0xc4b5fd  // Lavanda claro
+      ];
+
+      // Crear figuras geométricas suaves
+      const shapes = [];
+
+      // 1. Icosaedro (esfera suave con muchas caras)
+      const icoGeometry = new THREE.IcosahedronGeometry(0.6, 1);
+      const icoMaterial = new THREE.MeshPhysicalMaterial({
+        color: colors[0],
+        metalness: 0.1,
+        roughness: 0.2,
+        transmission: 0.1,
+        transparent: true,
+        opacity: 0.85,
+        clearcoat: 0.5
+      });
+      const ico = new THREE.Mesh(icoGeometry, icoMaterial);
+      ico.position.set(-0.4, 0.3, 0);
+      scene.add(ico);
+      shapes.push({ mesh: ico, speed: 0.004, floatSpeed: 0.002, floatOffset: 0 });
+
+      // 2. Toro (dona suave)
+      const torusGeometry = new THREE.TorusGeometry(0.5, 0.22, 20, 60);
+      const torusMaterial = new THREE.MeshPhysicalMaterial({
+        color: colors[1],
+        metalness: 0.1,
+        roughness: 0.25,
+        transparent: true,
+        opacity: 0.8,
+        clearcoat: 0.3
+      });
+      const torus = new THREE.Mesh(torusGeometry, torusMaterial);
+      torus.position.set(0.4, -0.2, 0.3);
+      scene.add(torus);
+      shapes.push({ mesh: torus, speed: 0.006, floatSpeed: 0.003, floatOffset: Math.PI / 2 });
+
+      // 3. Esfera
+      const sphereGeometry = new THREE.SphereGeometry(0.45, 32, 32);
+      const sphereMaterial = new THREE.MeshPhysicalMaterial({
+        color: colors[2],
+        metalness: 0.05,
+        roughness: 0.15,
+        transparent: true,
+        opacity: 0.65,
+        clearcoat: 0.4
+      });
+      const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+      sphere.position.set(0.2, 0.7, -0.4);
+      scene.add(sphere);
+      shapes.push({ mesh: sphere, speed: 0.003, floatSpeed: 0.0015, floatOffset: Math.PI });
+
+      // 4. Cilindro con tapas redondeadas
+      const cylinderGeometry = new THREE.CylinderGeometry(0.35, 0.35, 0.9, 32);
+      const cylinderMaterial = new THREE.MeshPhysicalMaterial({
+        color: colors[3],
+        metalness: 0.1,
+        roughness: 0.2,
+        transparent: true,
+        opacity: 0.7,
+        clearcoat: 0.3
+      });
+      const cylinder = new THREE.Mesh(cylinderGeometry, cylinderMaterial);
+      cylinder.position.set(-0.3, -0.5, 0.2);
+      scene.add(cylinder);
+      shapes.push({ mesh: cylinder, speed: 0.005, floatSpeed: 0.0025, floatOffset: Math.PI * 1.5 });
+
+      // Iluminación suave y envolvente
+      const ambientLight = new THREE.AmbientLight(0xfff5f8, 0.7);
+      scene.add(ambientLight);
+
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
+      directionalLight.position.set(3, 5, 5);
+      scene.add(directionalLight);
+
+      const pointLight1 = new THREE.PointLight(0xf472b6, 0.6, 10);
+      pointLight1.position.set(-3, 2, 3);
+      scene.add(pointLight1);
+
+      const pointLight2 = new THREE.PointLight(0xa78bfa, 0.6, 10);
+      pointLight2.position.set(3, -2, 3);
+      scene.add(pointLight2);
+
+      // Animación
+      let animationId;
+      let isVisible = true;
+      
+      const animate = () => {
+        if (!isVisible) return;
+        animationId = requestAnimationFrame(animate);
+        
+        const time = Date.now() * 0.001;
+
+        shapes.forEach((shape) => {
+          // Rotación suave en ambos ejes
+          shape.mesh.rotation.x += shape.speed;
+          shape.mesh.rotation.y += shape.speed * 0.8;
+          
+          // Flotación suave tipo seno
+          const floatY = Math.sin(time * 0.8 + shape.floatOffset) * 0.15;
+          shape.mesh.position.y = shape.mesh.userData.originalY + floatY;
+        });
+
+        renderer.render(scene, camera);
+      };
+
+      // Guardar posiciones originales
+      shapes.forEach((shape) => {
+        shape.mesh.userData.originalY = shape.mesh.position.y;
+      });
+
+      animate();
+
+      // Pausar cuando no es visible (performance)
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting;
+          if (isVisible) {
+            animate();
+          } else {
+            cancelAnimationFrame(animationId);
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      observer.observe(container);
+
+      // Resize handler
+      window.addEventListener('resize', () => {
+        const newIsMobile = window.innerWidth < 768;
+        const newSize = newIsMobile ? 80 : 120;
+        renderer.setSize(newSize, newSize);
+      });
+    });
+  });
+</script>
+
+<style>
+  .floating-3d-container {
+    width: 120px;
+    height: 120px;
+    position: relative;
+    pointer-events: none;
+  }
+  
+  .floating-shapes-canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+  }
+  
+  @media (max-width: 768px) {
+    .floating-3d-container {
+      width: 80px;
+      height: 80px;
+    }
+  }
+</style>
