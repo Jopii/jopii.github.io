@@ -1,5 +1,5 @@
 ---
-// Skills.astro - Sección de skills técnicos con tema soft/cute y elementos 3D
+// Skills.astro - Sección de skills técnicos con tema soft/cute y elementos 3D en esquinas
 import FloatingShapes3D from './FloatingShapes3D.astro';
 
 interface Props {
@@ -61,18 +61,30 @@ const skillCategories = [
 ---
 
 <section class={`py-20 md:py-28 bg-[#faf7f5] relative overflow-hidden ${className}`}>
-  <!-- Elementos 3D decorativos de fondo -->
-  <div class="absolute inset-0 pointer-events-none">
-    <!-- Círculo difuminado superior izquierdo -->
-    <div class="absolute -top-20 -left-20 w-64 h-64 rounded-full bg-gradient-to-br from-[#f472b6]/10 to-transparent blur-3xl"></div>
-    
-    <!-- Círculo difuminado inferior derecho -->
-    <div class="absolute -bottom-20 -right-20 w-80 h-80 rounded-full bg-gradient-to-br from-[#a78bfa]/10 to-transparent blur-3xl"></div>
+  <!-- Elementos 3D en las 4 esquinas de la sección -->
+  <!-- Esquina superior izquierda -->
+  <div class="absolute top-8 left-4 md:top-16 md:left-8 z-20">
+    <FloatingShapes3D shape="icosahedron" color="#f472b6" />
+  </div>
+  
+  <!-- Esquina superior derecha -->
+  <div class="absolute top-8 right-4 md:top-16 md:right-8 z-20">
+    <FloatingShapes3D shape="torus" color="#a78bfa" />
+  </div>
+  
+  <!-- Esquina inferior izquierda -->
+  <div class="absolute bottom-32 left-4 md:bottom-24 md:left-8 z-20">
+    <FloatingShapes3D shape="cylinder" color="#f9a8d4" />
+  </div>
+  
+  <!-- Esquina inferior derecha -->
+  <div class="absolute bottom-32 right-4 md:bottom-24 md:right-8 z-20">
+    <FloatingShapes3D shape="sphere" color="#c4b5fd" />
   </div>
   
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <!-- Section Header -->
-    <div class="text-center mb-16">
+    <div class="text-center mb-16 pt-24 md:pt-16">
       <p class="text-[#f472b6] font-medium mb-3 tracking-wide uppercase text-sm">Especialización</p>
       
       <h2 class="text-3xl md:text-4xl font-bold text-[#2d2a26] mb-4">
@@ -85,16 +97,11 @@ const skillCategories = [
       </p>
     </div>
     
-    <!-- Skills Grid con elementos 3D -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 relative">
-      {skillCategories.map((category, index) => (
-        <div class="bg-white rounded-2xl p-8 shadow-lg shadow-[#2d2a26]/5 hover:shadow-xl hover:shadow-[#2d2a26]/10 transition-all duration-300 border border-[#2d2a26]/5 hover:-translate-y-1 relative">
-          <!-- Elemento 3D flotante - esquina superior derecha de cada card -->
-          <div class="absolute -top-4 -right-4 md:-top-6 md:-right-6 z-20">
-            <FloatingShapes3D />
-          </div>
-          
-          <div class="text-center mb-6 pt-4">
+    <!-- Skills Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+      {skillCategories.map((category) => (
+        <div class="bg-white rounded-2xl p-8 shadow-lg shadow-[#2d2a26]/5 hover:shadow-xl hover:shadow-[#2d2a26]/10 transition-all duration-300 border border-[#2d2a26]/5 hover:-translate-y-1">
+          <div class="text-center mb-6">
             <div class="text-5xl mb-4">{category.icon}</div>
             
             <h3 class="text-xl font-bold text-[#2d2a26]">{category.title}</h3>
