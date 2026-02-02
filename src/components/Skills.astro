@@ -1,7 +1,5 @@
 ---
-// Skills.astro - Sección de skills técnicos con tema soft/cute y elementos 3D en esquinas
-import FloatingShapes3D from './FloatingShapes3D.astro';
-
+// Skills.astro - Sección de skills técnicos con tema soft/cute
 interface Props {
   class?: string;
 }
@@ -61,30 +59,9 @@ const skillCategories = [
 ---
 
 <section class={`py-20 md:py-28 bg-[#faf7f5] relative overflow-hidden ${className}`}>
-  <!-- Elementos 3D en las 4 esquinas de la sección -->
-  <!-- Esquina superior izquierda -->
-  <div class="absolute top-8 left-4 md:top-16 md:left-8 z-20">
-    <FloatingShapes3D shape="icosahedron" color="#f472b6" />
-  </div>
-  
-  <!-- Esquina superior derecha -->
-  <div class="absolute top-8 right-4 md:top-16 md:right-8 z-20">
-    <FloatingShapes3D shape="torus" color="#a78bfa" />
-  </div>
-  
-  <!-- Esquina inferior izquierda -->
-  <div class="absolute bottom-32 left-4 md:bottom-24 md:left-8 z-20">
-    <FloatingShapes3D shape="cylinder" color="#f9a8d4" />
-  </div>
-  
-  <!-- Esquina inferior derecha -->
-  <div class="absolute bottom-32 right-4 md:bottom-24 md:right-8 z-20">
-    <FloatingShapes3D shape="sphere" color="#c4b5fd" />
-  </div>
-  
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <!-- Section Header -->
-    <div class="text-center mb-16 pt-24 md:pt-16">
+    <div class="text-center mb-16">
       <p class="text-[#f472b6] font-medium mb-3 tracking-wide uppercase text-sm">Especialización</p>
       
       <h2 class="text-3xl md:text-4xl font-bold text-[#2d2a26] mb-4">
