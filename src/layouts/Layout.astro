@@ -1,5 +1,5 @@
 ---
-// Layout.astro - Layout base para todas las páginas
+// Layout.astro - Layout base con tema soft/cute
 interface Props {
   title: string;
   description?: string;
@@ -7,12 +7,12 @@ interface Props {
 
 const { 
   title, 
-  description = "Portfolio of Jesús Jódar - 3D Artist specialized in game assets, character design, and visual experiences for music artists."
+  description = "Portfolio de Jesús Jódar - 3D Artist & Creative Developer especializado en game assets, character design, y desarrollo creative tech."
 } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -27,25 +27,67 @@ const {
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     
-    <!-- Fonts -->
+    <!-- Fonts - Archivo + Space Grotesk -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <title>{title}</title>
     
     <style is:global>
+      :root {
+        --bg-primary: #faf7f5;
+        --bg-secondary: #ffffff;
+        --accent: #f472b6;
+        --accent-2: #a78bfa;
+        --text-primary: #2d2a26;
+        --text-secondary: #6b6560;
+        --border: rgba(45, 42, 38, 0.1);
+      }
+      
       html {
         scroll-behavior: smooth;
       }
+      
       body {
-        font-family: 'Inter', sans-serif;
-        background-color: #000;
-        color: #fff;
+        font-family: 'Space Grotesk', sans-serif;
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        line-height: 1.6;
+      }
+      
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Archivo', sans-serif;
+        font-weight: 600;
+        line-height: 1.2;
+      }
+      
+      /* Selection color */
+      ::selection {
+        background-color: var(--accent);
+        color: white;
+      }
+      
+      /* Scrollbar styling */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      
+      ::-webkit-scrollbar-track {
+        background: var(--bg-primary);
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background: var(--accent-2);
+        border-radius: 5px;
+      }
+      
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--accent);
       }
     </style>
   </head>
-  <body class="min-h-screen bg-black">
+  <body class="min-h-screen">
     <slot />
   </body>
 </html>

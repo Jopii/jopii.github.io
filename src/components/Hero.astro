@@ -1,5 +1,5 @@
 ---
-// Hero.astro - Sección hero principal con logo
+// Hero.astro - Sección hero con tema soft/cute
 interface Props {
   class?: string;
 }
@@ -8,46 +8,55 @@ const { class: className = "" } = Astro.props;
 ---
 
 <section class={`relative min-h-screen flex items-center justify-center overflow-hidden ${className}`}>
-  <!-- Background gradient -->
-  <div class="absolute inset-0 bg-gradient-to-br from-black via-black to-zinc-900"></div>
+  <!-- Background gradient suave -->
+  <div class="absolute inset-0 bg-gradient-to-br from-[#faf7f5] via-[#fff5f8] to-[#f5f0ff]"></div>
+  
+  <!-- Decorative elements -->
+  <div class="absolute top-20 left-10 w-64 h-64 bg-[#f472b6]/10 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-20 right-10 w-96 h-96 bg-[#a78bfa]/10 rounded-full blur-3xl"></div>
   
   <!-- Content -->
-  <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8">
+  <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
     <!-- Logo -->
     <div class="mb-8">
       <img 
         src="/img/logosvg.svg" 
         alt="Logo de Jesús Jódar"
-        class="w-32 h-32 md:w-40 md:h-40 mx-auto"
-        style="filter: invert(1);"
+        class="w-32 h-32 md:w-40 md:h-40 mx-auto drop-shadow-lg"
+        style="filter: invert(0.2) sepia(0.1) hue-rotate(300deg);"
       />
     </div>
     
-    <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight">
+    <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold text-[#2d2a26] mb-6 tracking-tight">
       Jesús Jódar
     </h1>
-    <p class="text-xl md:text-2xl text-white/70 mb-8 font-light tracking-wide">
-      3D Artist
+    <p class="text-xl md:text-2xl text-[#6b6560] mb-4 font-light">
+      3D Artist <span class="text-[#f472b6]">&</span> Creative Developer
     </p>
+    <p class="text-base md:text-lg text-[#6b6560]/80 mb-8 max-w-xl mx-auto">
+      Creando mundos en Blender y código. Apasionado por la intersección entre arte 3D, 
+      desarrollo web e inteligencia artificial.
+    </p>
+    
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
       <a 
         href="#gallery" 
-        class="px-8 py-3 bg-white text-black font-medium rounded-full hover:bg-white/90 transition-colors duration-200"
+        class="px-8 py-3 bg-[#f472b6] text-white font-medium rounded-full hover:bg-[#f472b6]/90 transition-all duration-200 shadow-lg shadow-[#f472b6]/25 hover:shadow-xl hover:shadow-[#f472b6]/30 hover:-translate-y-0.5"
       >
         Ver Portfolio
       </a>
       <a 
         href="#about" 
-        class="px-8 py-3 border border-white/30 text-white font-medium rounded-full hover:bg-white/10 transition-colors duration-200"
+        class="px-8 py-3 border-2 border-[#2d2a26]/20 text-[#2d2a26] font-medium rounded-full hover:bg-[#2d2a26]/5 transition-all duration-200 hover:border-[#2d2a26]/30"
       >
         Sobre Mí
       </a>
     </div>
   </div>
   
-  <!-- Scroll indicator - centrado -->
+  <!-- Scroll indicator -->
   <div class="absolute bottom-8 left-0 right-0 flex justify-center">
-    <a href="#gallery" class="text-white/50 hover:text-white/80 transition-colors duration-300">
+    <a href="#about" class="text-[#f472b6] hover:text-[#a78bfa] transition-colors duration-300 animate-bounce">
       <svg 
         xmlns="http://www.w3.org/2000/svg" 
         width="32" 
@@ -55,10 +64,9 @@ const { class: className = "" } = Astro.props;
         viewBox="0 0 24 24" 
         fill="none" 
         stroke="currentColor" 
-        stroke-width="1.5" 
+        stroke-width="2" 
         stroke-linecap="round" 
         stroke-linejoin="round"
-        class="animate-pulse"
       >
         <path d="M12 5v14M19 12l-7 7-7-7"/>
       </svg>
