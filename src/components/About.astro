@@ -6,28 +6,35 @@ interface Props {
 
 const { class: className = "" } = Astro.props;
 
-const skills3D = [
+const skillsVisual = [
   "Blender",
+  "Cinema 4D",
+  "Photoshop",
+  "Premiere",
+  "Marmoset Toolbag",
   "Substance Painter",
-  "ZBrush",
-  "Character Design",
-  "Props",
-  "Game Assets"
-];
-
-const skillsCode = [
-  "Python",
-  "JavaScript",
-  "HTML/CSS",
-  "Astro",
-  "Git/GitHub"
+  "ComfyUI",
+  "Stable Diffusion"
 ];
 
 const skillsAI = [
-  "PyTorch",
-  "OpenCV",
-  "Stable Diffusion",
-  "AI Generativa"
+  "LLaMA.cpp",
+  "Transformers",
+  "vLLM",
+  "ExLlama",
+  "Sherpa ONNX",
+  "Voice Fine-tuning",
+  "Audio Datasets",
+  "Local Inference"
+];
+
+const skillsDev = [
+  "Python (básico)",
+  "Swift (básico)",
+  "UI/UX Design",
+  "Real-time Voice Pipelines",
+  "AI Agent Interfaces",
+  "Astro"
 ];
 ---
 
@@ -38,7 +45,7 @@ const skillsAI = [
       <div class="flex-shrink-0">
         <img
           src="/img/pfp-1.webp"
-          alt="Foto de perfil de Jesús Jódar, artista 3D y desarrollador"
+          alt="Foto de perfil de Jesús Jódar, Visual Artist y AI Enthusiast"
           class="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover border-4 border-[#f472b6]/20 shadow-xl"
           width="192"
           height="192"
@@ -48,22 +55,30 @@ const skillsAI = [
       <!-- Información -->
       <div class="text-center md:text-left flex-1">
         <p class="text-[#f472b6] font-medium mb-2 tracking-wide uppercase text-sm">Hola, soy</p>
+        
         <h2 class="text-3xl md:text-4xl font-bold text-[#2d2a26] mb-2">
           Jesús Jódar
         </h2>
-        <p class="text-lg text-[#a78bfa] mb-6">3D Artist & Creative Developer</p>
+        
+        <p class="text-lg text-[#a78bfa] mb-6">Visual Artist | AI Enthusiast</p>
         
         <div class="space-y-4 text-[#6b6560] text-base md:text-lg leading-relaxed mb-8">
           <p>
-            Tengo 24 años y actualmente estudio diseño y desarrollo de videojuegos. 
-            Cuento con cuatro años de experiencia como artista 3D junior, creando 
-            experiencias visuales para artistas musicales y proyectos personales.
+            Tengo 24 años y actualmente me formo en <span class="text-[#f472b6] font-medium">Sistemas Microinformáticos y Redes</span>. 
+            Mi trayectoria en el arte visual comenzó con edición fotográfica en Photoshop y diseño gráfico, 
+            evolucionando hacia el <span class="text-[#a78bfa] font-medium">arte 3D autodidacta desde 2020</span>.
           </p>
+          
           <p>
-            Más allá del arte 3D, desarrollo herramientas en <span class="text-[#f472b6] font-medium">Python</span> para 
-            automatización de pipelines y exploro el mundo del <span class="text-[#a78bfa] font-medium">Machine Learning</span> 
-            para generación y manipulación de assets. Me apasiona la intersección entre 
-            creatividad y tecnología.
+            Hoy combino mi background visual con una profunda fascinación por la <span class="text-[#f472b6] font-medium">inteligencia artificial</span>. 
+            Tengo experiencia práctica con frameworks de inferencia como LLaMA.cpp, Transformers, vLLM y ExLlama, 
+            así como especialización en tecnologías de voz en tiempo real como Sherpa ONNX.
+          </p>
+          
+          <p>
+            Mi enfoque actual está en el <span class="text-[#a78bfa] font-medium">desarrollo de interfaces de comunicación humano-máquina</span>: 
+            asistentes de IA omnimodales de baja latencia que puedan ejecutarse localmente en dispositivos móviles. 
+            Creo que el futuro de la IA es personal, privado y accesible para todos.
           </p>
         </div>
         
@@ -71,11 +86,24 @@ const skillsAI = [
         <div class="space-y-4">
           <div>
             <p class="text-sm text-[#6b6560] mb-2 font-medium flex items-center gap-2">
-              <span>🎨</span> Arte 3D
+              <span>🎨</span> Arte Visual
             </p>
             <div class="flex flex-wrap justify-center md:justify-start gap-2">
-              {skills3D.map((skill) => (
+              {skillsVisual.map((skill) => (
                 <span class="px-3 py-1.5 text-sm text-[#2d2a26] bg-[#f472b6]/10 rounded-full border border-[#f472b6]/20 hover:bg-[#f472b6]/20 transition-colors duration-200">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+          
+          <div>
+            <p class="text-sm text-[#6b6560] mb-2 font-medium flex items-center gap-2">
+              <span>🤖</span> IA / ML
+            </p>
+            <div class="flex flex-wrap justify-center md:justify-start gap-2">
+              {skillsAI.map((skill) => (
+                <span class="px-3 py-1.5 text-sm text-[#2d2a26] bg-[#a78bfa]/10 rounded-full border border-[#a78bfa]/20 hover:bg-[#a78bfa]/20 transition-colors duration-200">
                   {skill}
                 </span>
               ))}
@@ -87,8 +115,8 @@ const skillsAI = [
               <span>💻</span> Desarrollo
             </p>
             <div class="flex flex-wrap justify-center md:justify-start gap-2">
-              {skillsCode.map((skill) => (
-                <span class="px-3 py-1.5 text-sm text-[#2d2a26] bg-[#a78bfa]/10 rounded-full border border-[#a78bfa]/20 hover:bg-[#a78bfa]/20 transition-colors duration-200">
+              {skillsDev.map((skill) => (
+                <span class="px-3 py-1.5 text-sm text-[#2d2a26] bg-[#6b6560]/10 rounded-full border border-[#6b6560]/20 hover:bg-[#6b6560]/20 transition-colors duration-200">
                   {skill}
                 </span>
               ))}
