@@ -1,68 +1,37 @@
 ---
-// About.astro - Sección de perfil con tema soft/cute
-interface Props {
-  class?: string;
-}
-
-const { class: className = "" } = Astro.props;
-
-const skillsVisual = [
-  "Blender",
-  "Cinema 4D",
-  "Photoshop",
-  "Premiere",
-  "Marmoset Toolbag",
-  "Substance Painter",
-  "ComfyUI",
-  "Stable Diffusion"
-];
-
-const skillsAI = [
-  "LLaMA.cpp",
-  "Transformers",
-  "vLLM",
-  "ExLlama",
-  "Sherpa ONNX",
-  "Voice Fine-tuning",
-  "Audio Datasets",
-  "Local Inference"
-];
-
-const skillsDev = [
-  "Python (básico)",
-  "Swift (básico)",
-  "UI/UX Design",
-  "Real-time Voice Pipelines",
-  "AI Agent Interfaces",
-  "Astro"
-];
+// About.astro - Sección de perfil simplificada (sin duplicación de skills)
 ---
 
-<section id="about" class={`py-20 md:py-28 bg-white ${className}`}>
+<section id="about" class="py-20 md:py-28 bg-white">
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16">
       <!-- Foto de perfil -->
-      <div class="flex-shrink-0">
-        <img
-          src="/img/pfp-1.webp"
-          alt="Foto de perfil de Jesús Jódar, Visual Artist y AI Enthusiast"
-          class="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover border-4 border-[#f472b6]/20 shadow-xl"
-          width="192"
-          height="192"
-        />
+      <div class="flex-shrink-0 reveal">
+        <div class="relative">
+          <img
+            src="/img/pfp-1.webp"
+            alt="Foto de perfil de Jesús Jódar, Visual Artist y AI Enthusiast"
+            class="w-40 h-40 md:w-52 md:h-52 rounded-full object-cover border-4 border-[#f472b6]/20 shadow-xl"
+            width="208"
+            height="208"
+            loading="lazy"
+          />
+          <!-- Decorative ring -->
+          <div class="absolute -inset-2 rounded-full border-2 border-dashed border-[#a78bfa]/20 animate-[spin_20s_linear_infinite]"></div>
+        </div>
       </div>
       
       <!-- Información -->
       <div class="text-center md:text-left flex-1">
-        <p class="text-[#f472b6] font-medium mb-2 tracking-wide uppercase text-sm">Hola, soy</p>
+        <p class="text-[#f472b6] font-medium mb-2 tracking-wide uppercase text-sm reveal">Hola, soy</p>
         
-        <h2 class="text-3xl md:text-4xl font-bold text-[#2d2a26] mb-2">
+        <h2 class="text-3xl md:text-4xl font-bold text-[#2d2a26] mb-2 reveal reveal-delay-1">
           Jesús Jódar
         </h2>
         
-        <p class="text-lg text-[#a78bfa] mb-6">Visual Artist | AI Enthusiast</p>
+        <p class="text-lg text-[#a78bfa] mb-6 reveal reveal-delay-1">Visual Artist | AI Enthusiast</p>
         
-        <div class="space-y-4 text-[#6b6560] text-base md:text-lg leading-relaxed mb-8">
+        <div class="space-y-4 text-[#6b6560] text-base md:text-lg leading-relaxed reveal reveal-delay-2">
           <p>
             Tengo 24 años y actualmente me formo en <span class="text-[#f472b6] font-medium">Sistemas Microinformáticos y Redes</span>. 
             Mi trayectoria en el arte visual comenzó con edición fotográfica en Photoshop y diseño gráfico, 
@@ -81,46 +50,20 @@ const skillsDev = [
             Creo que el futuro de la IA es personal, privado y accesible para todos.
           </p>
         </div>
-        
-        <!-- Skills Tags -->
-        <div class="space-y-4">
-          <div>
-            <p class="text-sm text-[#6b6560] mb-2 font-medium flex items-center gap-2">
-              <span>🎨</span> Arte Visual
-            </p>
-            <div class="flex flex-wrap justify-center md:justify-start gap-2">
-              {skillsVisual.map((skill) => (
-                <span class="px-3 py-1.5 text-sm text-[#2d2a26] bg-[#f472b6]/10 rounded-full border border-[#f472b6]/20 hover:bg-[#f472b6]/20 transition-colors duration-200">
-                  {skill}
-                </span>
-              ))}
-            </div>
+
+        <!-- Quick stats -->
+        <div class="grid grid-cols-3 gap-4 mt-8 reveal reveal-delay-3">
+          <div class="text-center md:text-left">
+            <p class="text-2xl md:text-3xl font-bold text-[#f472b6]">+4</p>
+            <p class="text-sm text-[#6b6560]">Años en 3D</p>
           </div>
-          
-          <div>
-            <p class="text-sm text-[#6b6560] mb-2 font-medium flex items-center gap-2">
-              <span>🤖</span> IA / ML
-            </p>
-            <div class="flex flex-wrap justify-center md:justify-start gap-2">
-              {skillsAI.map((skill) => (
-                <span class="px-3 py-1.5 text-sm text-[#2d2a26] bg-[#a78bfa]/10 rounded-full border border-[#a78bfa]/20 hover:bg-[#a78bfa]/20 transition-colors duration-200">
-                  {skill}
-                </span>
-              ))}
-            </div>
+          <div class="text-center md:text-left">
+            <p class="text-2xl md:text-3xl font-bold text-[#a78bfa]">9+</p>
+            <p class="text-sm text-[#6b6560]">Proyectos</p>
           </div>
-          
-          <div>
-            <p class="text-sm text-[#6b6560] mb-2 font-medium flex items-center gap-2">
-              <span>💻</span> Desarrollo
-            </p>
-            <div class="flex flex-wrap justify-center md:justify-start gap-2">
-              {skillsDev.map((skill) => (
-                <span class="px-3 py-1.5 text-sm text-[#2d2a26] bg-[#6b6560]/10 rounded-full border border-[#6b6560]/20 hover:bg-[#6b6560]/20 transition-colors duration-200">
-                  {skill}
-                </span>
-              ))}
-            </div>
+          <div class="text-center md:text-left">
+            <p class="text-2xl md:text-3xl font-bold text-[#f472b6]">IA</p>
+            <p class="text-sm text-[#6b6560]">Especialización</p>
           </div>
         </div>
       </div>

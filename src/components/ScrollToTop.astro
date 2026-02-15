@@ -1,0 +1,35 @@
+---
+// ScrollToTop.astro - Botón flotante para volver al inicio
+---
+
+<button
+  id="scroll-to-top"
+  class="fixed bottom-6 right-6 z-40 w-12 h-12 bg-[#f472b6] text-white rounded-full shadow-lg shadow-[#f472b6]/25 flex items-center justify-center opacity-0 pointer-events-none translate-y-4 transition-all duration-300 hover:bg-[#f472b6]/90 hover:shadow-xl hover:shadow-[#f472b6]/30 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#f472b6] focus:ring-offset-2"
+  aria-label="Volver al inicio de la página"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 19V5M5 12l7-7 7 7"/>
+  </svg>
+</button>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('scroll-to-top');
+    
+    const handleScroll = () => {
+      if (window.scrollY > 500) {
+        btn?.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+        btn?.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+      } else {
+        btn?.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+        btn?.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    btn?.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>

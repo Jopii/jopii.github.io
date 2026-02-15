@@ -1,24 +1,23 @@
 ---
-// index.astro - Página principal con tema soft/cute
+// index.astro - Página principal mejorada
 import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
 import About from '../components/About.astro';
 import Skills from '../components/Skills.astro';
 import Gallery from '../components/Gallery.astro';
 import Footer from '../components/Footer.astro';
+import ScrollToTop from '../components/ScrollToTop.astro';
 ---
 
-<Layout title="Jesús Jódar | 3D Artist & Creative Developer">
-  <main>
+<Layout title="Jesús Jódar | Visual Artist & AI Enthusiast">
+  <Navbar />
+  <main id="main-content">
     <Hero />
-    <div id="about">
-      <About />
-    </div>
-    
+    <About />
     <Skills />
-    
     <Gallery />
-    
-    <Footer />
   </main>
+  <Footer />
+  <ScrollToTop />
 </Layout>

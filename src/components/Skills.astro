@@ -1,11 +1,5 @@
 ---
-// Skills.astro - Sección de skills técnicos con tema soft/cute
-interface Props {
-  class?: string;
-}
-
-const { class: className = "" } = Astro.props;
-
+// Skills.astro - Sección de skills técnicos mejorada con animaciones
 const skillCategories = [
   {
     title: "Arte Visual",
@@ -56,14 +50,40 @@ const skillCategories = [
     ]
   }
 ];
+
+const focusAreas = [
+  {
+    icon: "⚡",
+    title: "Baja Latencia",
+    description: "Desarrollo de agentes de IA que respondan en tiempo real, eliminando la frustración de las esperas.",
+    color: "#f472b6"
+  },
+  {
+    icon: "📱",
+    title: "Inferencia Local",
+    description: "Modelos que funcionen en dispositivos móviles sin depender de la nube, priorizando privacidad y accesibilidad.",
+    color: "#a78bfa"
+  },
+  {
+    icon: "🎙️",
+    title: "Voz Natural",
+    description: "Interfaces de voz que suenen humanas, con capacidad de fine-tuning y personalización mediante datasets de audio.",
+    color: "#f472b6"
+  },
+  {
+    icon: "🎨",
+    title: "Diseño Intuitivo",
+    description: "Interfaces de nueva generación que hagan la IA accesible y agradable de usar para cualquier persona.",
+    color: "#a78bfa"
+  }
+];
 ---
 
-<section class={`py-20 md:py-28 bg-[#faf7f5] relative overflow-hidden ${className}`}>
+<section id="skills" class="py-20 md:py-28 bg-[#faf7f5] relative overflow-hidden">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <!-- Section Header -->
-    <div class="text-center mb-16">
+    <div class="text-center mb-16 reveal">
       <p class="text-[#f472b6] font-medium mb-3 tracking-wide uppercase text-sm">Especialización</p>
-      
       <h2 class="text-3xl md:text-4xl font-bold text-[#2d2a26] mb-4">
         Skills Técnicos
       </h2>
@@ -76,14 +96,12 @@ const skillCategories = [
     
     <!-- Skills Grid -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-      {skillCategories.map((category) => (
-        <div class="bg-white rounded-2xl p-8 shadow-lg shadow-[#2d2a26]/5 hover:shadow-xl hover:shadow-[#2d2a26]/10 transition-all duration-300 border border-[#2d2a26]/5 hover:-translate-y-1">
+      {skillCategories.map((category, idx) => (
+        <div class={`bg-white rounded-2xl p-8 shadow-lg shadow-[#2d2a26]/5 hover:shadow-xl hover:shadow-[#2d2a26]/10 transition-all duration-300 border border-[#2d2a26]/5 hover:-translate-y-1 reveal reveal-delay-${idx + 1}`}>
           <div class="text-center mb-6">
             <div class="text-5xl mb-4">{category.icon}</div>
-            
             <h3 class="text-xl font-bold text-[#2d2a26]">{category.title}</h3>
             <div class="w-12 h-1 mx-auto mt-3 rounded-full" style={`background-color: ${category.color}`}></div>
-            
             <p class="text-sm text-[#6b6560] mt-3">{category.description}</p>
           </div>
           
@@ -100,52 +118,24 @@ const skillCategories = [
     </div>
     
     <!-- Focus Areas -->
-    <div class="bg-white rounded-2xl p-8 shadow-lg shadow-[#2d2a26]/5 border border-[#2d2a26]/5 relative">
+    <div class="bg-white rounded-2xl p-8 shadow-lg shadow-[#2d2a26]/5 border border-[#2d2a26]/5 relative reveal">
       <div class="text-center mb-8">
         <h3 class="text-xl font-bold text-[#2d2a26] mb-2">Áreas de Enfoque</h3>
         <p class="text-[#6b6560]">Mi visión para el futuro de la IA</p>
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="flex items-start gap-4">
-          <div class="w-12 h-12 bg-[#f472b6]/10 rounded-xl flex items-center justify-center flex-shrink-0">
-            <span class="text-2xl">⚡</span>
+        {focusAreas.map((area) => (
+          <div class="flex items-start gap-4 group">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform duration-200 group-hover:scale-110" style={`background-color: ${area.color}15`}>
+              <span class="text-2xl">{area.icon}</span>
+            </div>
+            <div>
+              <h4 class="font-semibold text-[#2d2a26] mb-1">{area.title}</h4>
+              <p class="text-sm text-[#6b6560]">{area.description}</p>
+            </div>
           </div>
-          <div>
-            <h4 class="font-semibold text-[#2d2a26] mb-1">Baja Latencia</h4>
-            <p class="text-sm text-[#6b6560]">Desarrollo de agentes de IA que respondan en tiempo real, eliminando la frustración de las esperas.</p>
-          </div>
-        </div>
-        
-        <div class="flex items-start gap-4">
-          <div class="w-12 h-12 bg-[#a78bfa]/10 rounded-xl flex items-center justify-center flex-shrink-0">
-            <span class="text-2xl">📱</span>
-          </div>
-          <div>
-            <h4 class="font-semibold text-[#2d2a26] mb-1">Inferencia Local</h4>
-            <p class="text-sm text-[#6b6560]">Modelos que funcionen en dispositivos móviles sin depender de la nube, priorizando privacidad y accesibilidad.</p>
-          </div>
-        </div>
-        
-        <div class="flex items-start gap-4">
-          <div class="w-12 h-12 bg-[#f472b6]/10 rounded-xl flex items-center justify-center flex-shrink-0">
-            <span class="text-2xl">🎙️</span>
-          </div>
-          <div>
-            <h4 class="font-semibold text-[#2d2a26] mb-1">Voz Natural</h4>
-            <p class="text-sm text-[#6b6560]">Interfaces de voz que suenen humanas, con capacidad de fine-tuning y personalización mediante datasets de audio.</p>
-          </div>
-        </div>
-        
-        <div class="flex items-start gap-4">
-          <div class="w-12 h-12 bg-[#a78bfa]/10 rounded-xl flex items-center justify-center flex-shrink-0">
-            <span class="text-2xl">🎨</span>
-          </div>
-          <div>
-            <h4 class="font-semibold text-[#2d2a26] mb-1">Diseño Intuitivo</h4>
-            <p class="text-sm text-[#6b6560]">Interfaces de nueva generación que hagan la IA accesible y agradable de usar para cualquier persona.</p>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   </div>
